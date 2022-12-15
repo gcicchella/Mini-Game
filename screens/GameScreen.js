@@ -1,9 +1,10 @@
 import {Text, View, StyleSheet} from "react-native";
 
+import Title from "../components/Title";
 function GameScreen() {
     return (
         <View style={styles.screen}>
-            <Text>Ho pensato al numero</Text>
+            <Title>Ho pensato al numero</Title>
                 <View>
                     <Text>Più grande o più piccolo?</Text>
                 </View>
