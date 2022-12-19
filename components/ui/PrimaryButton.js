@@ -1,20 +1,16 @@
-import {View, Text, Pressable, StyleSheet} from "react-native";
+import {Pressable, Text, View, StyleSheet} from "react-native";
 
 import Colors from "../../constants/colors";
 
-function PrimaryButton({children, onPressButton}) {
+function PrimaryButton({children, onPressButton}){
     return(
-        <View style={styles.buttonOuterContainer}>
+        <View style = {styles.buttonOuterContainer}>
             <Pressable
-                style={({ pressed}) =>
-                pressed
-                    ? [styles.buttonInnerContainer, styles.buttonPressed]
-                    : styles.buttonInnerContainer
-                }
-                onPress={onPressButton}
+                style={({pressed}) => pressed ? [styles.buttonInnerContainer, styles.buttonPressed] : styles.buttonInnerContainer}
+                onPress = {onPressButton}
                 android_ripple={{color: Colors.primary600}}
-                >
-                <Text style={styles.buttonText}> {children} </Text>
+            >
+                <Text style = {styles.buttonText}>{children}</Text>
             </Pressable>
         </View>
     );
@@ -26,19 +22,23 @@ const styles = StyleSheet.create({
     buttonOuterContainer: {
         borderRadius: 28,
         margin: 4,
-        overflow: 'hidden' //nasconde gli effetti  presenti al di fuori di questo container
+        overflow: "hidden" //nasconde gli effetti che vanno al di fuori del container
     },
+
     buttonInnerContainer: {
         backgroundColor: Colors.primary500,
         paddingVertical: 8,
         paddingHorizontal: 16,
-        elevation: 2
+        elevation: 2,
     },
+
     buttonText: {
         color: 'white',
-        textAlign: 'center'
+        textAlign: 'center',
     },
+
     buttonPressed: {
-        opacity: 0.75
-    }
+      opacity: 0.75,
+
+    },
 });

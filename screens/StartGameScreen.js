@@ -1,73 +1,72 @@
 import {TextInput, View, StyleSheet, Alert} from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
-import {useState} from "react";
-
 import Colors from "../constants/colors";
+import {useState} from "react";
+import Title from "../components/ui/Title";
+import Card from "../components/ui/Card";
+import InstructionText from "../components/ui/InstructionText";
 
-function StartGameScreen({ onPickNumber }){
+function StartGameScreen({onPickNumber}){
     const [enteredNumber, setEnteredNumber] = useState('');
 
     function numberInputHandler(enteredText){
         setEnteredNumber(enteredText);
     }
 
-    function resetInpuntHandler() {
+    function resetInputHandler(){
         setEnteredNumber('');
     }
+
     function confirmInputHandler(){
-        const chooseNumber = parseInt(enteredNumber); //converto il numero in intero, perchè il numero viene visto come stringa
-        if(isNaN(chooseNumber) || chooseNumber <=0 || chooseNumber >99){
-            Alert.alert(
-                'Numero non valido.',
-                'Riprova!',
-                [{text: 'Ok', style: 'destructive', onPress: resetInpuntHandler }]
-            );
+        const chosenNumber = parseInt(enteredNumber);
+        if(isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99){
+            Alert.alert('Valore non corretto',
+                'Inserisci un numero tra 1 e 99',
+                [{text: 'OK', style: 'destructive', onPress: resetInputHandler}])
             return;
         }
-       onPickNumber(chooseNumber);
+        console.log('Valid Number: ' + chosenNumber);
+        onPickNumber(chosenNumber);
     }
 
-    return (
-        <View style={style.inputContainer}>
-            <TextInput
-                style={style.numberInput}
-                maxLength={2}
-                keyboardType={"number-pad"}
-                autoCapitalize='none' //permette che non viene scritto automaticamente in maiuscolo
-                autoCorrect={false} //disabilita l'autocorrezione
-                onChangeText={numberInputHandler}
-                value={enteredNumber}
-            />
-            <View style={style.buttonsContainer}>
-                <View style={style.buttonContainer}>
-                    <PrimaryButton onPressButton={resetInpuntHandler}> Resetta </PrimaryButton>
+    return(
+        <View style = {styles.rootContainer}>
+            <Title>Indovina il numerello</Title>
+            <Card>
+                <InstructionText>Inserisci un numero</InstructionText>
+                <TextInput
+                    style = {styles.numberInput}
+                    maxLength = {2}
+                    keyboardType = "number-pad"  //permette di poter scrivere solo numeri
+                    autoCapitalize = "none" //non viene scritto automaticamente in maiuscolo
+                    autoCorrect = {false}
+                    onChangeText = {numberInputHandler}
+                    value = {enteredNumber}
+                />
+                <View style = {styles.buttonsContainer}>
+                    <View style = {styles.buttonContainer}>
+                        <PrimaryButton onPressButton={resetInputHandler}>Reset</PrimaryButton>
+                    </View>
+
+                    <View style = {styles.buttonContainer}>
+                        <PrimaryButton onPressButton={confirmInputHandler}>Conferma</PrimaryButton>
+                    </View>
+
                 </View>
-                 <View style={style.buttonContainer}>
-                <PrimaryButton onPressButton={confirmInputHandler}> Conferma </PrimaryButton>
-                 </View>
-            </View>
+            </Card>
         </View>
     );
 }
 
 export default StartGameScreen;
 
-const style = StyleSheet.create({
-    inputContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
+const styles = StyleSheet.create({
+    rootContainer: {
+        flex: 1,
         marginTop: 100,
-        marginHorizontal: 24,
-        padding: 16,
-        backgroundColor: Colors.primary800,
-        borderRadius: 8,
-        elevation: 4,    //ombra per android
-        //ombra per ios
-        shadowColor: 'black',
-        shadowOffset: {width: 0, height: 2},
-        shadowRadius: 6,
-        shadowOpacity: 1
+        alignItems: 'center'
     },
+
     numberInput: {
         height: 50,
         width: 50,
@@ -76,13 +75,15 @@ const style = StyleSheet.create({
         borderBottomWidth: 2,
         color: Colors.accent500,
         marginVertical: 8,
-        frontWeight: 'bold',
+        fontWeight: 'bold',
         textAlign: 'center'
     },
+
     buttonsContainer: {
-        flexDirection: "row"
+      flexDirection: 'row',
     },
+
     buttonContainer: {
-        flex: 1
-    }
+        flex: 1,
+    },
 });
