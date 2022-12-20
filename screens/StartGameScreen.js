@@ -1,4 +1,4 @@
-import {TextInput, View, StyleSheet, Alert, useWindowDimensions} from "react-native";
+import {TextInput, View, StyleSheet, Alert, useWindowDimensions, KeyboardAvoidingView, ScrollView} from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Colors from "../constants/colors";
 import {useState} from "react";
@@ -6,10 +6,11 @@ import Title from "../components/ui/Title";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
 
+
 function StartGameScreen({onPickNumber}){
     const [enteredNumber, setEnteredNumber] = useState('');
 
-    const {width, height} = useDimensions();
+    const {width, height} = useWindowDimensions();
 
     function numberInputHandler(enteredText){
         setEnteredNumber(enteredText);
@@ -34,31 +35,35 @@ function StartGameScreen({onPickNumber}){
     const marginTopDistance = height < 300 ? 30 : 100;
 
     return(
-        <View style = {[styles.rootContainer, {marginTop: marginTopDistance}]}>
-            <Title>Indovina il numerello</Title>
-            <Card>
-                <InstructionText>Inserisci un numero</InstructionText>
-                <TextInput
-                    style = {styles.numberInput}
-                    maxLength = {2}
-                    keyboardType = "number-pad"  //permette di poter scrivere solo numeri
-                    autoCapitalize = "none" //non viene scritto automaticamente in maiuscolo
-                    autoCorrect = {false}
-                    onChangeText = {numberInputHandler}
-                    value = {enteredNumber}
-                />
-                <View style = {styles.buttonsContainer}>
-                    <View style = {styles.buttonContainer}>
-                        <PrimaryButton onPressButton={resetInputHandler}>Reset</PrimaryButton>
-                    </View>
+        <ScrollView style={styles.screen}>
+            <KeyboardAvoidingView style = {styles.screen} behavior={"position"} >
+                <View style = {[styles.rootContainer, {marginTop: marginTopDistance}]}>
+                    <Title>Indovina il numerello</Title>
+                    <Card>
+                        <InstructionText>Inserisci un numero</InstructionText>
+                        <TextInput
+                            style = {styles.numberInput}
+                            maxLength = {2}
+                            keyboardType = "number-pad"  //permette di poter scrivere solo numeri
+                            autoCapitalize = "none" //non viene scritto automaticamente in maiuscolo
+                            autoCorrect = {false}
+                            onChangeText = {numberInputHandler}
+                            value = {enteredNumber}
+                        />
+                        <View style = {styles.buttonsContainer}>
+                            <View style = {styles.buttonContainer}>
+                                <PrimaryButton onPressButton={resetInputHandler}>Reset</PrimaryButton>
+                            </View>
 
-                    <View style = {styles.buttonContainer}>
-                        <PrimaryButton onPressButton={confirmInputHandler}>Conferma</PrimaryButton>
-                    </View>
+                            <View style = {styles.buttonContainer}>
+                                <PrimaryButton onPressButton={confirmInputHandler}>Conferma</PrimaryButton>
+                            </View>
 
+                        </View>
+                    </Card>
                 </View>
-            </Card>
-        </View>
+            </KeyboardAvoidingView>
+        </ScrollView>
     );
 }
 
@@ -91,4 +96,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flex: 1,
     },
+    screen: {
+        flex: 1
+    }
 });
