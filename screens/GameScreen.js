@@ -103,18 +103,19 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         padding: 24,
+        alignItems: 'center'
     },
 
     instructionText: {
-        marginBottom: 12,
+        marginBottom: 12
     },
 
     buttonsContainer: {
-        flexDirection: 'row',
+        flexDirection: 'row'
     },
 
     buttonContainer: {
-        flex: 1,
+        flex: 1
     },
 
     listContainer: {
