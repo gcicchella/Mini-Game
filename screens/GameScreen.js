@@ -2,7 +2,7 @@ import {View, StyleSheet, Alert, FlatList, useWindowDimensions} from "react-nati
 import {useEffect, useState} from "react";
 import {Ionicons} from '@expo/vector-icons'
 
-import Title from "../components/ui/Title";
+import TitleIos from "../components/ui/Title";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Card from "../components/ui/Card";
@@ -110,7 +110,7 @@ function GameScreen({userNumber, onGameOver}){
 
     return(
         <View style = {styles.screen}>
-            <Title style = {styles.title}>Numero scelto</Title>
+            <TitleIos style = {styles.title}>Numero scelto</TitleIos>
             {content}
             <View style = {styles.listContainer}>
                 <FlatList

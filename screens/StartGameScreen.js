@@ -2,7 +2,7 @@ import {TextInput, View, StyleSheet, Alert, useWindowDimensions, KeyboardAvoidin
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Colors from "../constants/colors";
 import {useState} from "react";
-import Title from "../components/ui/Title";
+import TitleIos from "../components/ui/Title";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
 
@@ -38,7 +38,7 @@ function StartGameScreen({onPickNumber}){
         <ScrollView style={styles.screen}>
             <KeyboardAvoidingView style = {styles.screen} behavior={"position"} >
                 <View style = {[styles.rootContainer, {marginTop: marginTopDistance}]}>
-                    <Title>Indovina il numerello</Title>
+                    <TitleIos>Indovina il numerello</TitleIos>
                     <Card>
                         <InstructionText>Inserisci un numero</InstructionText>
                         <TextInput

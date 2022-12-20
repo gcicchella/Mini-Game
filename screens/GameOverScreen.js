@@ -1,5 +1,5 @@
 import {Image, View, StyleSheet, Text, useWindowDimensions, ScrollView} from "react-native";
-import Title from "../components/ui/Title";
+import TitleIos from "../components/ui/Title";
 import Colors from "../constants/colors";
 import PrimaryButton from "../components/ui/PrimaryButton";
 
@@ -26,7 +26,7 @@ function GameOverScreen({roundsNumber, userNumber, onStartNewGame}){
     return(
         <ScrollView style={styles.screen}>
             <View style = {styles.rootContainer}>
-                <Title>E' FINITA BEPPE</Title>
+                <TitleIos>E' FINITA BEPPE</TitleIos>
                 <View style = {[styles.imageContainer, imageStyle]}>
                     <Image
                         style = {styles.image }

@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
         // fontWeight: 'bold',
         color: Colors.accent500,
         textAlign: 'center',
-        borderWidth: 2,
+       // borderWidth: Platform.OS === 'android' ? 2 : 0,
+        // borderWidth: Platform.select({ios: 0, android: 2}),
         borderColor: Colors.accent500,
         padding: 12,
         maxWidth: '80%', //si riferiscono al contenitore in cui è presente il titolo
